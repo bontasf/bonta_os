@@ -142,9 +142,7 @@ STATUS API ParseElf64(IN VOID *FileBuffer, OUT VOID **ElfEntry, IN ALLOCATE_MEMO
         }
     }
 
-    ElfEntryOutput = (VOID *)((UINT8 *)FileBuffer + (Header->e_entry - MemoryMin));
-
 Cleanup:
-    *ElfEntry = ElfEntryOutput;
+    *ElfEntry = (VOID *)((UINT8 *)ElfEntryOutput + (Header->e_entry - MemoryMin));
     return Status;
 }

@@ -79,4 +79,77 @@ typedef struct _DIRECTORY_CONTENT
     BOOLEAN IsDirectory;
 } DIRECTORY_CONTENT;
 
+typedef enum _MEMORY_TYPE
+{
+    MemoryUsable,
+    MemoryReserved,
+    MemoryACPI,
+    MemoryMMIO,
+    MemoryFramebuffer,
+    MemoryKernelImage,
+    MemoryBootloader,
+} MEMORY_TYPE;
+
+typedef struct _MEMORY_REGION_DESCRIPTOR
+{
+    UINT64 PhysicalStart;
+    UINT64 PageCount;
+    MEMORY_TYPE Type;
+    UINT64 Attribute;
+} MEMORY_REGION_DESCRIPTOR;
+
+typedef struct _SYSTEM_MEMORY
+{
+    MEMORY_REGION_DESCRIPTOR *MemoryDescriptors;
+    UINT64 NumberOfMemoryDescriptors;
+} SYSTEM_MEMORY;
+
+typedef struct _PIXEL_BITMASK
+{
+    UINT32 RedMask;
+    UINT32 GreenMask;
+    UINT32 BlueMask;
+    UINT32 ReservedMask;
+} PIXEL_BITMASK;
+
+typedef struct _GRAPHICS_OUTPUT_MODE_INFORMATION
+{
+    UINT32 Version;
+    UINT32 HorizontalResolution;
+    UINT32 VerticalResolution;
+    UINT8 PixelFormat;
+    PIXEL_BITMASK PixelInformation;
+    UINT32 PixelsPerScanLine;
+} GRAPHICS_OUTPUT_MODE_INFORMATION;
+
+typedef struct _VIDEO_ADAPTER
+{
+    GRAPHICS_OUTPUT_MODE_INFORMATION Info;
+    UINT64 FrameBufferBase;
+    UINT64 FrameBufferSize;
+} VIDEO_ADAPTER;
+
+typedef struct _HII_LETTER_BITMAP
+{
+    UINT64 LetterWidth;
+    UINT64 LetterHeight;
+    UINT8* LetterBuffer;
+} PACKED HII_LETTER_BITMAP;
+
+typedef struct _HII_CHARACTERS
+{
+    HII_LETTER_BITMAP Letters[0x100];
+} PACKED HII_CHARACTERS;
+
+typedef UINT64 (API *PHYSICAL_TO_VIRTUAL_MAP)(UINT64 PhysicalAddress);
+
+typedef struct _KERNEL_BOOT_INFORMATION
+{
+    UINT64 RootSystemDescriptorPointer;
+    SYSTEM_MEMORY *SystemMemory;
+    VIDEO_ADAPTER *VideoAdapter;
+    HII_CHARACTERS *CharatersBitmap;
+    PHYSICAL_TO_VIRTUAL_MAP PhysicalToVirtualMap;
+} KERNEL_BOOT_INFORMATION;
+
 #endif /* _PLATFORM_TYPES_H_ */

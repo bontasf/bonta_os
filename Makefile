@@ -50,6 +50,6 @@ clean:
 	rm -rf build
 
 get_dependencies:
-	git clone git@github.com:sfbonta/image_creator.git
-	git clone git@github.com:sfbonta/bootloader.git
-	git clone git@github.com:sfbonta/kernel.git
+	git clone git@github.com:bontasf/image_creator.git
+	git clone git@github.com:bontasf/bootloader.git
+	git clone git@github.com:bontasf/kernel.git
