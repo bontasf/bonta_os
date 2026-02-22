@@ -38,6 +38,8 @@ run: install
 	-name BontaOS \
 	-machine type=q35,accel=kvm \
 	-usb \
+	-serial stdio \
+	-serial file:Uart.log \
 	-device usb-mouse \
 	-rtc base=localtime \
 	-nic user,model=virtio-net-pci \
