@@ -10,6 +10,7 @@
 
 #define ASM __asm__ volatile
 #define INTERRUPT __attribute__((interrupt))
+#define NORETURN __attribute__((noreturn))
 
 #define IN
 #define OUT
@@ -149,7 +150,10 @@ typedef struct _KERNEL_BOOT_INFORMATION
     SYSTEM_MEMORY *SystemMemory;
     VIDEO_ADAPTER *VideoAdapter;
     HII_CHARACTERS *CharatersBitmap;
-    PHYSICAL_TO_VIRTUAL_MAP PhysicalToVirtualMap;
 } KERNEL_BOOT_INFORMATION;
+
+UINT64 API PhysicalToVirtual(UINT64 PhysicalAddress);
+
+UINT64 API VirtualToPhysical(UINT64 VirtualAddress);
 
 #endif /* _PLATFORM_TYPES_H_ */

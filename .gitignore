@@ -40,3 +40,5 @@ build/*
 kernel
 image_creator
 bootloader
+
+*.log
