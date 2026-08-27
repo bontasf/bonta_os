@@ -6,6 +6,8 @@
 #define ALIGN_UP(value, alignment) (((value) + ((alignment) - 1)) & ~((alignment) - 1))
 #define ALIGN_DOWN(value, alignment) ((value) & ~((alignment) - 1))
 
+#define COMPILE_ASSERT(Expression, Name) typedef char COMPILE_ASSERT_##Name[(Expression) ? 1 : -1]
+
 UINT8 API MemoryCompare(CONST IN VOID *LhsBuffer, CONST IN VOID *RhsBuffer, CONST IN UINT64 BufferLength);
 
 VOID API MemoryCopy(CONST IN VOID *Source, OUT VOID *Destination, CONST IN UINT64 Size);
